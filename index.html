@@ -279,7 +279,7 @@ if (sessionStorage.getItem('auth')==='1') {
 async function loadData() {
   setLC(loadingHTML());
   try {
-    if (GAS_URL === 'https://script.google.com/macros/s/AKfycbxx70eBaMPNhYGqnHqT41gSJ4c0SaVoc3CTd-S4FEzT81Vht7kTwzqFp7-Wcsp1cYNb/exec') { showDemo(); return; }
+    if (GAS_URL === 'YOUR_GAS_WEB_APP_URL_HERE') { showDemo(); return; }
     const r = await fetch(GAS_URL + '?action=all&t=' + Date.now());
     const j = await r.json();
     if (!j.ok) throw new Error(j.error||'エラー');
