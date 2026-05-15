@@ -423,15 +423,16 @@ async function parseProjectSheet(sheetName, staffMap) {
   const rows = await fetchSheet(sheetName);
   if (rows.length < 2) return null;
 
-  const name         = rows[0][1] || '';
-  const manager      = rows[1][1] || '';
-  const status       = rows[2][1] || '進行中';
-  const budget       = Number(rows[3][1] || 0);
-  const targetBudget = Number(rows[4][1] || 0);
+const row0vals = (rows[0][1] || '').split(' ');
+  const name         = row0vals[0] || '';
+  const manager      = row0vals.slice(1, row0vals.length - 1).join(' ') || '';
+  const status       = row0vals[row0vals.length - 1] || '進行中';
+  const budget       = Number((rows[1][1] || '').replace(/,/g, '') || 0);
+  const targetBudget = Number((rows[2][1] || '').replace(/,/g, '') || 0);
   if (!name) return null;
 
   const procAssignees = {};
-  for (let i = 7; i < rows.length; i++) {
+  for (let i = 4; i < rows.length; i++) {
     const pn = rows[i][0] || '';
     const pa = rows[i][1] || '';
     if (pn) procAssignees[pn] = pa;
