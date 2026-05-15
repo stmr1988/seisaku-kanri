@@ -393,9 +393,10 @@ async function loadData() {
     // シート一覧はスプレッドシートから取得できないため
     // configシートのE列に案件シート名一覧を記載する方式
     // E列: 案件シート名（2行目以降）
+const indexRows = await fetchSheet('index');
     const projectSheetNames = [];
-    for (let i = 1; i < configRows.length; i++) {
-      const sn = configRows[i][4] || '';
+    for (let i = 1; i < indexRows.length; i++) {
+      const sn = indexRows[i][0] || '';
       if (sn) projectSheetNames.push(sn.trim());
     }
 
