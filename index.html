@@ -431,7 +431,7 @@ async function parseProjectSheet(sheetName, staffMap) {
   if (!name) return null;
 
   const procAssignees = {};
-  for (let i = 6; i < rows.length; i++) {
+  for (let i = 7; i < rows.length; i++) {
     const pn = rows[i][0] || '';
     const pa = rows[i][1] || '';
     if (pn) procAssignees[pn] = pa;
