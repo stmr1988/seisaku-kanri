@@ -4,163 +4,206 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>制作進捗管理</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0c0d10;--bg2:#13141a;--bg3:#1a1b23;--bg4:#22232e;
-  --border:#2a2b38;--border2:#363748;
-  --text:#e2e4f0;--text2:#7e8199;--text3:#50526a;
-  --accent:#4f7fff;--accent-h:#6b94ff;--accent-bg:#4f7fff18;
-  --green:#34d399;--green-bg:#34d39912;
-  --amber:#fbbf24;--amber-bg:#fbbf2412;
-  --red:#f87171;--red-bg:#f8717112;
-  --blue:#60a5fa;--teal:#2dd4bf;
-  --sans:'Outfit','Noto Sans JP',sans-serif;
+  --bg:#ffffff;
+  --bg2:#f7f7f8;
+  --bg3:#f0f0f2;
+  --border:#e4e4e7;
+  --border2:#d1d1d6;
+  --text:#111113;
+  --text2:#6b6b7b;
+  --text3:#a0a0b0;
+  --accent:#111113;
+  --accent-bg:#f0f0f2;
+  --green:#16a34a;--green-bg:#f0fdf4;--green-border:#bbf7d0;
+  --amber:#d97706;--amber-bg:#fffbeb;--amber-border:#fde68a;
+  --red:#dc2626;--red-bg:#fef2f2;--red-border:#fecaca;
+  --blue:#2563eb;--blue-bg:#eff6ff;--blue-border:#bfdbfe;
+  --sans:'Noto Sans JP',sans-serif;
   --mono:'DM Mono',monospace;
-  --r:10px;--r2:14px;
+  --sidebar:220px;
 }
 html{font-size:14px}
 body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6;-webkit-font-smoothing:antialiased}
-::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar{width:5px;height:5px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
 
-/* LOGIN */
-#login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg);position:relative;overflow:hidden}
-.lg-a{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,#4f7fff1a 0%,transparent 70%);top:-120px;left:-80px;pointer-events:none}
-.lg-b{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,#2dd4bf0e 0%,transparent 70%);bottom:-60px;right:0;pointer-events:none}
-.lcard{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:44px 48px;width:420px;position:relative;z-index:1}
-.lbrand{display:flex;align-items:center;gap:10px;margin-bottom:28px}
-.bicon{width:34px;height:34px;border-radius:8px;background:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.bicon svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:1.8}
-.bname{font-size:17px;font-weight:700;letter-spacing:-.2px}
-.lh1{font-size:22px;font-weight:700;margin-bottom:6px}
-.lsub{font-size:13px;color:var(--text2);margin-bottom:32px}
-.fld{margin-bottom:16px}
-.fld label{display:block;font-size:11px;font-weight:600;color:var(--text2);letter-spacing:.6px;text-transform:uppercase;margin-bottom:7px}
-.fld input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:11px 14px;color:var(--text);font-size:14px;font-family:var(--sans);outline:none;transition:border-color .15s,box-shadow .15s}
-.fld input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-bg)}
-.lbtn{width:100%;margin-top:8px;padding:13px;background:var(--accent);color:#fff;border:none;border-radius:var(--r);font-size:14px;font-weight:700;font-family:var(--sans);cursor:pointer;letter-spacing:.3px;transition:background .15s,transform .1s}
-.lbtn:hover{background:var(--accent-h)}
+/* ── LOGIN ── */
+#login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg2)}
+.lcard{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:40px 44px;width:400px}
+.lbrand{display:flex;align-items:center;gap:9px;margin-bottom:28px}
+.lbrand-icon{width:30px;height:30px;background:var(--text);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.lbrand-icon svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:1.8}
+.lbrand-name{font-size:15px;font-weight:700}
+.lh1{font-size:20px;font-weight:700;margin-bottom:5px}
+.lsub{font-size:13px;color:var(--text2);margin-bottom:28px}
+.fld{margin-bottom:14px}
+.fld label{display:block;font-size:11px;font-weight:700;color:var(--text2);letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px}
+.fld input{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 13px;color:var(--text);font-size:14px;font-family:var(--sans);outline:none;transition:border-color .15s,box-shadow .15s}
+.fld input:focus{border-color:var(--text);box-shadow:0 0 0 3px rgba(0,0,0,.06)}
+.lbtn{width:100%;margin-top:6px;padding:11px;background:var(--text);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;font-family:var(--sans);cursor:pointer;transition:opacity .15s,transform .1s}
+.lbtn:hover{opacity:.85}
 .lbtn:active{transform:scale(.98)}
 .lerr{display:none;margin-top:10px;font-size:13px;color:var(--red)}
 
-/* APP */
-#app{display:none;min-height:100vh}
-.topbar{height:54px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 20px;position:sticky;top:0;z-index:200}
-.tbl{display:flex;align-items:center;gap:12px}
-.tbrand{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:700}
-.tbrand .bicon{width:26px;height:26px;border-radius:6px}
-.tbrand .bicon svg{width:14px;height:14px}
-.tbr{display:flex;align-items:center;gap:8px}
-.tbbtn{display:flex;align-items:center;gap:5px;padding:6px 11px;background:transparent;border:1px solid var(--border);border-radius:7px;color:var(--text2);font-size:12px;font-family:var(--sans);cursor:pointer;transition:all .15s}
-.tbbtn:hover{border-color:var(--border2);color:var(--text)}
-.tbbtn svg{width:13px;height:13px;flex-shrink:0}
+/* ── APP SHELL ── */
+#app{display:none;min-height:100vh;display:none}
+.shell{display:flex;min-height:100vh}
+
+/* SIDEBAR */
+.sidebar{
+  width:var(--sidebar);flex-shrink:0;
+  background:var(--bg2);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;
+  position:sticky;top:0;height:100vh;overflow-y:auto;
+}
+.sb-brand{padding:20px 18px 16px;border-bottom:1px solid var(--border)}
+.sb-brand-inner{display:flex;align-items:center;gap:8px}
+.sb-icon{width:26px;height:26px;background:var(--text);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sb-icon svg{width:14px;height:14px;fill:none;stroke:#fff;stroke-width:1.8}
+.sb-name{font-size:13px;font-weight:700;line-height:1.3}
+.sb-sub{font-size:10px;color:var(--text3);margin-top:1px}
+.sb-nav{padding:12px 10px;flex:1}
+.sb-section-label{font-size:10px;font-weight:700;color:var(--text3);letter-spacing:.5px;text-transform:uppercase;padding:6px 8px 4px}
+.sb-item{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 10px;border-radius:7px;cursor:pointer;
+  font-size:13px;font-weight:500;color:var(--text2);
+  transition:background .12s,color .12s;
+  border:none;background:none;font-family:var(--sans);width:100%;text-align:left;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.sb-item:hover{background:var(--bg3);color:var(--text)}
+.sb-item.active{background:var(--bg);color:var(--text);font-weight:700;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.sb-item svg{width:15px;height:15px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.8}
+.sb-item-text{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sb-divider{height:1px;background:var(--border);margin:8px 10px}
+.sb-footer{padding:12px 10px;border-top:1px solid var(--border)}
+.sb-footer-btn{display:flex;align-items:center;gap:7px;padding:7px 10px;border-radius:7px;cursor:pointer;font-size:12px;color:var(--text2);border:none;background:none;font-family:var(--sans);width:100%;transition:background .12s,color .12s}
+.sb-footer-btn:hover{background:var(--bg3);color:var(--text)}
+.sb-footer-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8}
+
+/* MAIN */
+.main-area{flex:1;min-width:0;display:flex;flex-direction:column}
+.topbar{height:50px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 24px;background:var(--bg)}
+.topbar-title{font-size:14px;font-weight:700}
+.topbar-right{display:flex;align-items:center;gap:8px}
+.tb-btn{display:flex;align-items:center;gap:5px;padding:6px 11px;background:transparent;border:1px solid var(--border);border-radius:7px;color:var(--text2);font-size:12px;font-family:var(--sans);cursor:pointer;transition:all .12s}
+.tb-btn:hover{border-color:var(--border2);color:var(--text);background:var(--bg2)}
+.tb-btn svg{width:13px;height:13px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.8}
 .rts{font-size:11px;color:var(--text3);font-family:var(--mono)}
-.page{padding:24px 20px;max-width:1300px;margin:0 auto}
+.content{padding:28px 28px;flex:1}
 
 /* STATES */
 .loading-wrap{text-align:center;padding:80px 0;color:var(--text2)}
-.spinner{width:30px;height:30px;border-radius:50%;border:2px solid var(--border2);border-top-color:var(--accent);animation:spin .7s linear infinite;margin:0 auto 14px}
+.spinner{width:28px;height:28px;border-radius:50%;border:2px solid var(--border2);border-top-color:var(--text);animation:spin .7s linear infinite;margin:0 auto 14px}
 @keyframes spin{to{transform:rotate(360deg)}}
-.err-box{background:var(--red-bg);border:1px solid #f8717130;border-radius:var(--r);padding:16px 20px;color:var(--red);font-size:13px;line-height:1.7}
-.setup-box{background:var(--amber-bg);border:1px solid #fbbf2430;border-radius:var(--r);padding:18px 20px;font-size:13px;line-height:1.8;margin-bottom:20px}
-.setup-box code{font-family:var(--mono);font-size:12px;background:var(--bg4);padding:1px 5px;border-radius:4px;color:var(--amber)}
+.err-box{background:var(--red-bg);border:1px solid var(--red-border);border-radius:8px;padding:14px 18px;color:var(--red);font-size:13px;line-height:1.7}
+.info-box{background:var(--amber-bg);border:1px solid var(--amber-border);border-radius:8px;padding:14px 18px;font-size:13px;line-height:1.8;margin-bottom:20px;color:var(--amber)}
+.info-box code{font-family:var(--mono);font-size:11px;background:rgba(0,0,0,.06);padding:1px 5px;border-radius:4px}
 
 /* LIST */
-.lctrl{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:20px}
-.swrap{position:relative;flex:1;min-width:200px;max-width:360px}
-.swrap svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:14px;height:14px;color:var(--text3);pointer-events:none;fill:none;stroke:currentColor;stroke-width:1.8}
-.sinput{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:8px 12px 8px 33px;color:var(--text);font-size:13px;font-family:var(--sans);outline:none;transition:border-color .15s}
-.sinput:focus{border-color:var(--accent)}
-.ftabs{display:flex;gap:4px}
-.ftab{padding:6px 14px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid transparent;transition:all .15s;background:transparent;font-family:var(--sans);color:var(--text2)}
-.ftab:hover{background:var(--bg3);color:var(--text)}
-.ftab.active{background:var(--accent-bg);border-color:#4f7fff40;color:var(--accent-h)}
-.lmeta{font-size:12px;color:var(--text3);margin-bottom:8px}
-.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
-.pcard{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:18px 20px;cursor:pointer;transition:border-color .15s,transform .15s;position:relative;overflow:hidden}
-.pcard:hover{border-color:var(--border2);transform:translateY(-1px)}
-.pcard:hover::after{opacity:1}
-.pcard::after{content:'';position:absolute;inset:0;border-radius:var(--r2);background:linear-gradient(135deg,#4f7fff06 0%,transparent 60%);opacity:0;transition:opacity .2s}
-.pc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:12px}
-.pc-name{font-size:14px;font-weight:700;line-height:1.35}
-.badge{font-size:10px;font-weight:600;padding:3px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0}
-.ba{background:var(--green-bg);color:var(--green);border:1px solid #34d39928}
-.bd{background:var(--accent-bg);color:var(--accent-h);border:1px solid #4f7fff28}
-.bh{background:var(--amber-bg);color:var(--amber);border:1px solid #fbbf2428}
-.pc-meta{font-size:12px;color:var(--text2);margin-bottom:14px;display:flex;gap:14px;flex-wrap:wrap}
+.page-header{margin-bottom:22px}
+.page-title{font-size:18px;font-weight:700;margin-bottom:4px}
+.page-sub{font-size:13px;color:var(--text2)}
+.list-ctrl{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:18px}
+.swrap{position:relative;flex:1;min-width:180px;max-width:320px}
+.swrap svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:14px;height:14px;color:var(--text3);pointer-events:none;fill:none;stroke:currentColor;stroke-width:1.8}
+.sinput{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:8px 12px 8px 32px;color:var(--text);font-size:13px;font-family:var(--sans);outline:none;transition:border-color .12s}
+.sinput:focus{border-color:var(--text)}
+.ftabs{display:flex;gap:2px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:3px}
+.ftab{padding:5px 12px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;border:none;background:transparent;font-family:var(--sans);color:var(--text2);transition:all .12s}
+.ftab:hover{color:var(--text)}
+.ftab.active{background:var(--bg);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.lmeta{font-size:12px;color:var(--text3);margin-bottom:10px}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.pcard{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:18px;cursor:pointer;transition:border-color .12s,box-shadow .12s}
+.pcard:hover{border-color:var(--border2);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.pc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:10px}
+.pc-name{font-size:13px;font-weight:700;line-height:1.4}
+.badge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+.ba{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+.bd{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)}
+.bh{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-border)}
+.pc-meta{font-size:12px;color:var(--text2);margin-bottom:12px;display:flex;gap:12px;flex-wrap:wrap}
 .pc-meta span{color:var(--text);font-weight:600}
-.pb-label{display:flex;justify-content:space-between;font-size:11px;color:var(--text3);margin-bottom:5px}
-.pb-label b{color:var(--text2);font-weight:500;font-family:var(--mono);font-size:11px}
-.pbar{height:5px;background:var(--bg4);border-radius:3px;overflow:hidden;margin-bottom:10px}
-.pbar-fill{height:100%;border-radius:3px;transition:width .4s ease}
+.pb-label{display:flex;justify-content:space-between;font-size:11px;color:var(--text2);margin-bottom:4px}
+.pb-label b{color:var(--text);font-weight:600;font-family:var(--mono);font-size:11px}
+.pbar{height:4px;background:var(--bg3);border-radius:2px;overflow:hidden;margin-bottom:10px}
+.pbar-fill{height:100%;border-radius:2px;transition:width .4s ease}
 .fg{background:var(--green)}.fa{background:var(--amber)}.fr{background:var(--red)}
-.pc-foot{display:flex;gap:14px}
-.pc-stat{font-size:11px;color:var(--text3)}
-.pc-stat b{color:var(--text2);font-family:var(--mono);font-size:11px;font-weight:500}
+.pc-foot{display:flex;gap:12px;flex-wrap:wrap}
+.pc-stat{font-size:11px;color:var(--text2)}
+.pc-stat b{color:var(--text);font-family:var(--mono);font-size:11px;font-weight:500}
 
 /* DETAIL */
-#detail-view{display:none}
-.back-btn{display:inline-flex;align-items:center;gap:6px;background:none;border:none;font-family:var(--sans);color:var(--text2);font-size:13px;cursor:pointer;padding:4px 0;margin-bottom:22px;transition:color .15s}
+.back-btn{display:inline-flex;align-items:center;gap:5px;background:none;border:none;font-family:var(--sans);color:var(--text2);font-size:13px;cursor:pointer;padding:4px 0;margin-bottom:20px;transition:color .12s}
 .back-btn:hover{color:var(--text)}
-.back-btn svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2}
-.dhead{margin-bottom:22px}
-.dname{font-size:22px;font-weight:700;letter-spacing:-.3px;margin-bottom:8px}
-.dtags{display:flex;gap:8px;flex-wrap:wrap}
-.dtag{font-size:12px;color:var(--text2);background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:4px 12px}
+.back-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2}
+.dhead{margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid var(--border)}
+.dname{font-size:20px;font-weight:700;margin-bottom:8px}
+.dtags{display:flex;gap:6px;flex-wrap:wrap}
+.dtag{font-size:12px;color:var(--text2);background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:3px 10px}
 .dtag span{color:var(--text);font-weight:600}
-.kgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:22px}
-.kpi{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px}
-.klbl{font-size:10px;font-weight:600;color:var(--text3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px}
-.kval{font-size:21px;font-weight:700;font-family:var(--mono);letter-spacing:-.5px}
-.ksub{font-size:11px;color:var(--text3);margin-top:2px}
-.cg{color:var(--green)}.ca{color:var(--amber)}.cr{color:var(--red)}.cb{color:var(--blue)}.ct{color:var(--teal)}
-.bbc{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:18px 20px;margin-bottom:22px}
-.bbchead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}
-.bbctitle{font-size:12px;font-weight:600;color:var(--text2);letter-spacing:.3px;text-transform:uppercase}
-.bbcpct{font-size:22px;font-weight:700;font-family:var(--mono)}
-.bigbar{height:8px;background:var(--bg4);border-radius:4px;overflow:hidden;margin-bottom:10px}
-.bigfill{height:100%;border-radius:4px;transition:width .5s ease}
-.bbcfoot{display:flex;justify-content:space-between;font-size:12px;color:var(--text3)}
-.bbcfoot b{font-family:var(--mono);font-size:11px;color:var(--text2);font-weight:500}
-.tabs{display:flex;gap:2px;border-bottom:1px solid var(--border);margin-bottom:20px}
-.tab{padding:10px 16px;font-size:13px;font-weight:600;font-family:var(--sans);color:var(--text2);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s}
+.kgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:20px}
+.kpi{background:var(--bg2);border-radius:8px;padding:14px 16px}
+.klbl{font-size:10px;font-weight:700;color:var(--text3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:5px}
+.kval{font-size:20px;font-weight:700;font-family:var(--mono);letter-spacing:-.5px}
+.ksub{font-size:11px;color:var(--text2);margin-top:2px}
+.cg{color:var(--green)}.ca{color:var(--amber)}.cr{color:var(--red)}.cb{color:var(--blue)}
+.bbc{background:var(--bg2);border-radius:8px;padding:16px 18px;margin-bottom:20px}
+.bbchead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+.bbctitle{font-size:11px;font-weight:700;color:var(--text2);letter-spacing:.3px;text-transform:uppercase}
+.bbcpct{font-size:20px;font-weight:700;font-family:var(--mono)}
+.bigbar{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin-bottom:8px}
+.bigfill{height:100%;border-radius:3px;transition:width .5s ease}
+.bbcfoot{display:flex;justify-content:space-between;font-size:12px;color:var(--text2)}
+.bbcfoot b{font-family:var(--mono);font-size:11px;color:var(--text);font-weight:500}
+
+/* TABS */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:18px}
+.tab{padding:9px 16px;font-size:13px;font-weight:600;font-family:var(--sans);color:var(--text2);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .12s}
 .tab:hover{color:var(--text)}
-.tab.active{color:var(--accent-h);border-bottom-color:var(--accent)}
+.tab.active{color:var(--text);border-bottom-color:var(--text)}
 .tpanel{display:none}
 .tpanel.active{display:block}
-.twrap{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);overflow:hidden}
+
+/* TABLE */
+.twrap{border:1px solid var(--border);border-radius:10px;overflow:hidden}
 table{width:100%;border-collapse:collapse}
-thead th{font-size:10px;font-weight:600;color:var(--text3);letter-spacing:.5px;text-transform:uppercase;padding:11px 14px;border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
+thead th{font-size:10px;font-weight:700;color:var(--text2);letter-spacing:.5px;text-transform:uppercase;padding:10px 14px;border-bottom:1px solid var(--border);text-align:left;white-space:nowrap;background:var(--bg2)}
 thead th:not(:first-child){text-align:right}
 tbody td{padding:11px 14px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:middle}
 tbody td:not(:first-child){text-align:right}
 tbody tr:last-child td{border-bottom:none}
-tbody tr:hover td{background:var(--bg3)}
-.pno{display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;background:var(--bg4);border-radius:4px;font-size:10px;font-family:var(--mono);color:var(--text3);margin-right:7px;flex-shrink:0}
+tbody tr:hover td{background:var(--bg2)}
+.pno{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;background:var(--bg3);border-radius:4px;font-size:10px;font-family:var(--mono);color:var(--text2);margin-right:7px;flex-shrink:0}
 .pncell{display:flex;align-items:center}
-.psub{font-size:11px;color:var(--text3);margin-top:1px}
+.psub{font-size:11px;color:var(--text2);margin-top:1px}
 .mono{font-family:var(--mono);font-size:12px}
 .ccost{color:var(--amber);font-family:var(--mono);font-size:12px}
-.mbwrap{display:flex;align-items:center;gap:7px;justify-content:flex-end}
-.mbar{width:60px;height:4px;background:var(--bg4);border-radius:2px;overflow:hidden;flex-shrink:0}
+.mbwrap{display:flex;align-items:center;gap:6px;justify-content:flex-end}
+.mbar{width:56px;height:3px;background:var(--bg3);border-radius:2px;overflow:hidden;flex-shrink:0}
 .mfill{height:100%;border-radius:2px}
-.ptxt{font-family:var(--mono);font-size:11px;color:var(--text2);min-width:38px;text-align:right}
+.ptxt{font-family:var(--mono);font-size:11px;color:var(--text2);min-width:36px;text-align:right}
 .nd{color:var(--text3)}
-.lctrl2{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
-.sel{background:var(--bg3);border:1px solid var(--border);border-radius:7px;color:var(--text);font-size:12px;font-family:var(--sans);padding:7px 10px;outline:none}
-.sel:focus{border-color:var(--accent)}
+.lctrl2{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.sel{background:var(--bg);border:1px solid var(--border);border-radius:7px;color:var(--text);font-size:12px;font-family:var(--sans);padding:6px 10px;outline:none}
+.sel:focus{border-color:var(--text)}
 .srow{display:flex;flex-wrap:wrap;gap:8px}
-.schip{display:flex;align-items:center;gap:8px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:6px 14px}
-.av{width:22px;height:22px;border-radius:50%;background:var(--accent-bg);border:1px solid #4f7fff50;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--accent-h);flex-shrink:0}
+.schip{display:flex;align-items:center;gap:7px;background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:5px 12px}
+.av{width:22px;height:22px;border-radius:50%;background:var(--bg3);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--text2);flex-shrink:0}
 .cname{font-size:13px;font-weight:600}
 .crate{font-family:var(--mono);font-size:11px;color:var(--text2)}
-.stitle{font-size:11px;font-weight:600;color:var(--text3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:12px}
-@media(max-width:640px){
-  .page{padding:16px 14px}
-  .lcard{width:calc(100vw - 32px);padding:32px 24px}
+.stitle{font-size:11px;font-weight:700;color:var(--text2);letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px}
+
+@media(max-width:768px){
+  .sidebar{display:none}
+  .content{padding:20px 16px}
   .kgrid{grid-template-columns:repeat(2,1fr)}
   thead th:nth-child(n+4),tbody td:nth-child(n+4){display:none}
 }
@@ -170,11 +213,12 @@ tbody tr:hover td{background:var(--bg3)}
 
 <!-- LOGIN -->
 <div id="login-screen">
-  <div class="lg-a"></div><div class="lg-b"></div>
   <div class="lcard">
     <div class="lbrand">
-      <div class="bicon"><svg viewBox="0 0 18 18"><rect x="1" y="2" width="16" height="14" rx="2.5"/><path d="M5 7h8M5 11h5"/></svg></div>
-      <span class="bname">制作進捗管理</span>
+      <div class="lbrand-icon"><svg viewBox="0 0 18 18"><rect x="1" y="2" width="16" height="14" rx="2.5"/><path d="M5 7h8M5 11h5"/></svg></div>
+      <div>
+        <div class="lbrand-name">制作進捗管理</div>
+      </div>
     </div>
     <div class="lh1">ログイン</div>
     <div class="lsub">IDとパスワードを入力してください</div>
@@ -193,65 +237,92 @@ tbody tr:hover td{background:var(--bg3)}
 
 <!-- APP -->
 <div id="app">
-  <div class="topbar">
-    <div class="tbl">
-      <div class="tbrand">
-        <div class="bicon"><svg viewBox="0 0 18 18" fill="none" stroke="#fff" stroke-width="1.8"><rect x="1" y="2" width="16" height="14" rx="2.5"/><path d="M5 7h8M5 11h5"/></svg></div>
-        制作進捗管理
-      </div>
-      <span class="rts" id="rts"></span>
-    </div>
-    <div class="tbr">
-      <button class="tbbtn" id="reload-btn">
-        <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 16 16"><path d="M13.5 8A5.5 5.5 0 1 1 8 2.5c1.8 0 3.4.9 4.5 2.2M13.5 2v3h-3"/></svg>
-        更新
-      </button>
-      <button class="tbbtn" id="logout-btn">
-        <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 16 16"><path d="M10 8H2M5 5l-3 3 3 3M10 2h2.5A1.5 1.5 0 0 1 14 3.5v9A1.5 1.5 0 0 1 12.5 14H10"/></svg>
-        ログアウト
-      </button>
-    </div>
-  </div>
-
-  <div class="page">
-    <div id="list-view">
-      <div class="lctrl">
-        <div class="swrap">
-          <svg viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5l3 3"/></svg>
-          <input type="search" class="sinput" id="sinput" placeholder="案件名・担当者で検索...">
-        </div>
-        <div class="ftabs">
-          <button class="ftab active" data-f="all">すべて</button>
-          <button class="ftab" data-f="active">進行中</button>
-          <button class="ftab" data-f="done">完了</button>
-          <button class="ftab" data-f="hold">保留</button>
+  <div class="shell">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="sb-brand">
+        <div class="sb-brand-inner">
+          <div class="sb-icon"><svg viewBox="0 0 18 18" fill="none" stroke="#fff" stroke-width="1.8"><rect x="1" y="2" width="16" height="14" rx="2.5"/><path d="M5 7h8M5 11h5"/></svg></div>
+          <div>
+            <div class="sb-name">制作進捗管理</div>
+          </div>
         </div>
       </div>
-      <div class="lmeta" id="lmeta"></div>
-      <div id="lcontent"></div>
+      <div class="sb-nav">
+        <div class="sb-section-label">案件</div>
+        <div id="sb-projects"></div>
+      </div>
+      <div class="sb-footer">
+        <button class="sb-footer-btn" id="reload-btn">
+          <svg viewBox="0 0 16 16"><path d="M13.5 8A5.5 5.5 0 1 1 8 2.5c1.8 0 3.4.9 4.5 2.2M13.5 2v3h-3"/></svg>
+          データを更新
+        </button>
+        <button class="sb-footer-btn" id="logout-btn">
+          <svg viewBox="0 0 16 16"><path d="M10 8H2M5 5l-3 3 3 3M10 2h2.5A1.5 1.5 0 0 1 14 3.5v9A1.5 1.5 0 0 1 12.5 14H10"/></svg>
+          ログアウト
+        </button>
+      </div>
     </div>
 
-    <div id="detail-view">
-      <button class="back-btn" id="back-btn">
-        <svg viewBox="0 0 16 16"><path d="M10 3L4 8l6 5"/></svg>
-        案件一覧に戻る
-      </button>
-      <div id="dcontent"></div>
+    <!-- MAIN -->
+    <div class="main-area">
+      <div class="topbar">
+        <div class="topbar-title" id="topbar-title">案件一覧</div>
+        <div class="topbar-right">
+          <span class="rts" id="rts"></span>
+        </div>
+      </div>
+      <div class="content">
+        <!-- LIST -->
+        <div id="list-view">
+          <div class="page-header">
+            <div class="page-title">案件一覧</div>
+            <div class="page-sub" id="page-sub">読み込み中...</div>
+          </div>
+          <div class="list-ctrl">
+            <div class="swrap">
+              <svg viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5l3 3"/></svg>
+              <input type="search" class="sinput" id="sinput" placeholder="案件名・担当者で検索...">
+            </div>
+            <div class="ftabs">
+              <button class="ftab active" data-f="all">すべて</button>
+              <button class="ftab" data-f="active">進行中</button>
+              <button class="ftab" data-f="done">完了</button>
+              <button class="ftab" data-f="hold">保留</button>
+            </div>
+          </div>
+          <div class="lmeta" id="lmeta"></div>
+          <div id="lcontent"></div>
+        </div>
+
+        <!-- DETAIL -->
+        <div id="detail-view" style="display:none">
+          <button class="back-btn" id="back-btn">
+            <svg viewBox="0 0 16 16"><path d="M10 3L4 8l6 5"/></svg>
+            案件一覧に戻る
+          </button>
+          <div id="dcontent"></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <script>
-// ★ GAS URLをここに設定
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbxx70eBaMPNhYGqnHqT41gSJ4c0SaVoc3CTd-S4FEzT81Vht7kTwzqFp7-Wcsp1cYNb/exec';
-const CRED = { id:'heiwamed', pass:'669966' };
+// =============================================
+//  ★ スプレッドシートIDをここに設定
+// =============================================
+const SHEET_ID = '1gf5xoG_JhnQvfWnxkrZGGcaiuFh9krHiJecdDlGCUGw';
 
+// =============================================
+//  認証
+// =============================================
+const CRED = { id:'heiwamed', pass:'669966' };
 let DATA = null;
 let curFilter = 'all';
 let curSearch = '';
 let curProject = null;
 
-// ── AUTH ──
 function doLogin() {
   const id = document.getElementById('uid').value.trim();
   const pw = document.getElementById('upw').value;
@@ -271,52 +342,193 @@ document.getElementById('reload-btn').onclick = loadData;
 document.getElementById('back-btn').onclick = showList;
 
 if (sessionStorage.getItem('auth')==='1') {
-  document.getElementById('login-screen').style.display='none';
-  document.getElementById('app').style.display='block';
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
 }
 
-// ── DATA ──
+// =============================================
+//  スプレッドシート読み込み（gviz方式）
+// =============================================
+async function fetchSheet(sheetName) {
+  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheetName)}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`シート「${sheetName}」の取得失敗`);
+  const text = await res.text();
+  return parseCSV(text);
+}
+
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  return lines.map(line => {
+    const cols = [];
+    let cur = '', inQ = false;
+    for (let i = 0; i < line.length; i++) {
+      const c = line[i];
+      if (c === '"') { inQ = !inQ; }
+      else if (c === ',' && !inQ) { cols.push(cur.trim()); cur = ''; }
+      else { cur += c; }
+    }
+    cols.push(cur.trim());
+    return cols;
+  });
+}
+
+// =============================================
+//  データ取得・整形
+// =============================================
 async function loadData() {
   setLC(loadingHTML());
+  if (SHEET_ID === 'YOUR_SHEET_ID_HERE') { showDemo(); return; }
+
   try {
-    if (GAS_URL === 'YOUR_GAS_WEB_APP_URL_HERE') { showDemo(); return; }
-    const r = await fetch(GAS_URL + '?action=all&t=' + Date.now());
-    const j = await r.json();
-    if (!j.ok) throw new Error(j.error||'エラー');
-    DATA = j.data;
+    // configシート読み込み
+    const configRows = await fetchSheet('config');
+    const staffMap = {};
+    for (let i = 1; i < configRows.length; i++) {
+      const name = configRows[i][0] || '';
+      const rate = Number(configRows[i][1] || 0);
+      if (name) staffMap[name] = rate;
+    }
+
+    // シート一覧はスプレッドシートから取得できないため
+    // configシートのE列に案件シート名一覧を記載する方式
+    // E列: 案件シート名（2行目以降）
+    const projectSheetNames = [];
+    for (let i = 1; i < configRows.length; i++) {
+      const sn = configRows[i][4] || '';
+      if (sn) projectSheetNames.push(sn.trim());
+    }
+
+    const projects = [];
+    for (const sn of projectSheetNames) {
+      try {
+        const p = await parseProjectSheet(sn, staffMap);
+        if (p) projects.push(p);
+      } catch(e) {
+        console.log('Skip:', sn, e.message);
+      }
+    }
+
+    DATA = { projects };
     stamp();
+    renderSidebar();
     renderList();
   } catch(e) {
-    setLC(`<div class="err-box">⚠ データ取得エラー: ${e.message}<br><small style="opacity:.7;display:block;margin-top:4px">GAS URLとスプレッドシート構成を確認してください</small></div>`);
+    setLC(`<div class="err-box">⚠ データ取得エラー: ${e.message}<br><small style="opacity:.7;display:block;margin-top:4px">スプレッドシートの共有設定と構成を確認してください</small></div>`);
   }
+}
+
+async function parseProjectSheet(sheetName, staffMap) {
+  const rows = await fetchSheet(sheetName);
+  if (rows.length < 2) return null;
+
+  const name         = rows[0][1] || '';
+  const manager      = rows[1][1] || '';
+  const status       = rows[2][1] || '進行中';
+  const budget       = Number(rows[3][1] || 0);
+  const targetBudget = Number(rows[4][1] || 0);
+  if (!name) return null;
+
+  const procAssignees = {};
+  for (let i = 6; i < rows.length; i++) {
+    const pn = rows[i][0] || '';
+    const pa = rows[i][1] || '';
+    if (pn) procAssignees[pn] = pa;
+  }
+
+  // ログシート読み込み
+  let logs = [];
+  try {
+    const logRows = await fetchSheet(sheetName + '_log');
+    for (let i = 1; i < logRows.length; i++) {
+      const r = logRows[i];
+      const date     = r[0] || '';
+      const process  = r[1] || '';
+      const assignee = r[2] || '';
+      const hours    = Number(r[3] || 0);
+      if (!process || !assignee || !hours) continue;
+      const hourlyRate = staffMap[assignee] || 0;
+      const cost = Math.round(hours * hourlyRate);
+      logs.push({ date, process, assignee, hours, hourlyRate, cost });
+    }
+  } catch(e) { /* ログシートなし */ }
+
+  // 工程ごとに集計
+  const procMap = {};
+  for (const log of logs) {
+    if (!log.process) continue;
+    if (!procMap[log.process]) procMap[log.process] = { hours:0, cost:0 };
+    procMap[log.process].hours += log.hours;
+    procMap[log.process].cost  += log.cost;
+  }
+
+  const PROC_NAMES = ['契約','ヒアリングシート回収','サイトマップ作成','ディレクトリマップ作成','トップページWF作成','下層ページテキスト作成','トップページデザイン','下層ページデザイン','トップページ実装','下層ページ実装','公開','GSC・GA4設定'];
+  const processes = PROC_NAMES.map(pn => ({
+    name: pn,
+    assignee: procAssignees[pn] || '',
+    hours: Math.round((procMap[pn]?.hours||0)*10)/10,
+    cost:  Math.round(procMap[pn]?.cost||0),
+  }));
+
+  const usedCost = processes.reduce((s,p) => s+p.cost, 0);
+  const staffSet = {};
+  for (const log of logs) {
+    if (log.assignee && !staffSet[log.assignee]) staffSet[log.assignee] = staffMap[log.assignee]||0;
+  }
+  const staff = Object.entries(staffSet).map(([name,rate])=>({name,hourlyRate:rate}));
+
+  return { sheetName, name, manager, status, budget, targetBudget, usedCost, processes, staff, logs };
 }
 
 function stamp() {
   document.getElementById('rts').textContent = '最終更新 ' + new Date().toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'});
 }
+
+// =============================================
+//  サイドバー
+// =============================================
+function renderSidebar() {
+  const ps = DATA.projects || [];
+  const html = ps.map(p => `
+    <button class="sb-item" data-s="${x(p.sheetName)}" onclick="showDetail('${x(p.sheetName)}')">
+      <svg viewBox="0 0 16 16"><rect x="1" y="2" width="14" height="12" rx="2"/><path d="M4 6h8M4 9.5h5"/></svg>
+      <span class="sb-item-text">${x(p.name)}</span>
+    </button>`).join('');
+  document.getElementById('sb-projects').innerHTML = html;
+}
+
+function setSidebarActive(sheetName) {
+  document.querySelectorAll('.sb-item').forEach(b => {
+    b.classList.toggle('active', b.dataset.s === sheetName);
+  });
+}
+
+// =============================================
+//  案件一覧
+// =============================================
+function showList() {
+  document.getElementById('list-view').style.display = 'block';
+  document.getElementById('detail-view').style.display = 'none';
+  document.getElementById('topbar-title').textContent = '案件一覧';
+  document.querySelectorAll('.sb-item').forEach(b => b.classList.remove('active'));
+  renderList();
+}
+
 function setLC(html) { document.getElementById('lcontent').innerHTML = html; }
 function loadingHTML() { return `<div class="loading-wrap"><div class="spinner"></div><div>読み込み中...</div></div>`; }
-
-// ── LIST ──
-function showList() {
-  document.getElementById('list-view').style.display='block';
-  document.getElementById('detail-view').style.display='none';
-}
 
 document.querySelectorAll('.ftab').forEach(b => {
   b.onclick = () => {
     document.querySelectorAll('.ftab').forEach(x=>x.classList.remove('active'));
-    b.classList.add('active');
-    curFilter = b.dataset.f;
-    renderList();
+    b.classList.add('active'); curFilter = b.dataset.f; renderList();
   };
 });
 document.getElementById('sinput').oninput = e => { curSearch = e.target.value.trim().toLowerCase(); renderList(); };
 
 function filterP(ps) {
   return ps.filter(p => {
-    const mf = curFilter==='all' ? true : curFilter==='active' ? (!p.status||p.status==='進行中') : curFilter==='done' ? p.status==='完了' : p.status==='保留';
-    const ms = !curSearch || p.name.toLowerCase().includes(curSearch) || (p.manager||'').toLowerCase().includes(curSearch);
+    const mf = curFilter==='all'?true:curFilter==='active'?(!p.status||p.status==='進行中'):curFilter==='done'?p.status==='完了':p.status==='保留';
+    const ms = !curSearch || p.name.toLowerCase().includes(curSearch)||(p.manager||'').toLowerCase().includes(curSearch);
     return mf && ms;
   });
 }
@@ -324,6 +536,7 @@ function filterP(ps) {
 function renderList() {
   if (!DATA) return;
   const ps = filterP(DATA.projects||[]);
+  document.getElementById('page-sub').textContent = `全 ${DATA.projects.length} 件`;
   document.getElementById('lmeta').textContent = ps.length + ' 件表示';
   if (!ps.length) { setLC(`<div class="loading-wrap" style="padding:40px 0;font-size:13px">該当する案件がありません</div>`); return; }
   setLC(`<div class="cgrid">${ps.map(pcHTML).join('')}</div>`);
@@ -331,13 +544,12 @@ function renderList() {
 }
 
 function pcHTML(p) {
-  const pct = p.targetBudget>0 ? Math.min((p.usedCost/p.targetBudget)*100,100) : 0;
+  const pct = p.targetBudget>0?Math.min((p.usedCost/p.targetBudget)*100,100):0;
   const rem = p.targetBudget - p.usedCost;
   const fc  = pct>=90?'fr':pct>=70?'fa':'fg';
   const bc  = p.status==='完了'?'bd':p.status==='保留'?'bh':'ba';
-  const sl  = p.status||'進行中';
   return `<div class="pcard" data-s="${x(p.sheetName)}">
-    <div class="pc-top"><div class="pc-name">${x(p.name)}</div><div class="badge ${bc}">${sl}</div></div>
+    <div class="pc-top"><div class="pc-name">${x(p.name)}</div><div class="badge ${bc}">${p.status||'進行中'}</div></div>
     <div class="pc-meta"><div>担当 <span>${x(p.manager||'未設定')}</span></div><div>制作費 <span>¥${f(p.budget)}</span></div></div>
     <div class="pb-label"><span>目標予算消化率</span><b>${Math.round(pct)}%</b></div>
     <div class="pbar"><div class="pbar-fill ${fc}" style="width:${pct}%"></div></div>
@@ -349,15 +561,18 @@ function pcHTML(p) {
   </div>`;
 }
 
-// ── DETAIL ──
+// =============================================
+//  案件詳細
+// =============================================
 function showDetail(sn) {
-  const p = (DATA.projects||[]).find(q => q.sheetName===sn);
+  const p = (DATA.projects||[]).find(q=>q.sheetName===sn);
   if (!p) return;
   curProject = p;
-  document.getElementById('list-view').style.display='none';
-  document.getElementById('detail-view').style.display='block';
+  document.getElementById('list-view').style.display = 'none';
+  document.getElementById('detail-view').style.display = 'block';
+  document.getElementById('topbar-title').textContent = p.name;
+  setSidebarActive(sn);
   document.getElementById('dcontent').innerHTML = buildDetail(p);
-  // tabs
   document.querySelectorAll('.tab').forEach(t => {
     t.onclick = () => {
       document.querySelectorAll('.tab').forEach(u=>u.classList.remove('active'));
@@ -368,7 +583,6 @@ function showDetail(sn) {
       if (t.dataset.t==='log') renderLog(p);
     };
   });
-  // log filters
   ['log-pf','log-sf'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.onchange = () => renderLog(p);
@@ -381,7 +595,7 @@ function buildDetail(p) {
   const used = p.usedCost||0;
   const rem  = p.targetBudget - used;
   const brem = p.budget - used;
-  const pct  = p.targetBudget>0 ? (used/p.targetBudget)*100 : 0;
+  const pct  = p.targetBudget>0?(used/p.targetBudget)*100:0;
   const pcap = Math.min(pct,100);
   const fc   = pct>=90?'fr':pct>=70?'fa':'fg';
   const th   = (p.processes||[]).reduce((s,q)=>s+(q.hours||0),0);
@@ -392,27 +606,23 @@ function buildDetail(p) {
     <div class="kpi"><div class="klbl">目標予算</div><div class="kval">¥${f(p.targetBudget)}</div><div class="ksub">制作費の${p.budget>0?Math.round(p.targetBudget/p.budget*100):'—'}%</div></div>
     <div class="kpi"><div class="klbl">使用人件費</div><div class="kval ca">¥${f(used)}</div><div class="ksub">合計 ${th}h</div></div>
     <div class="kpi"><div class="klbl">目標予算 残り</div><div class="kval ${rem<0?'cr':'cg'}">¥${f(rem)}</div><div class="ksub">${rem<0?'⚠ 超過中':'残り '+(100-Math.round(pcap))+'%'}</div></div>
-    <div class="kpi"><div class="klbl">制作費 残り</div><div class="kval ${brem<0?'cr':'ct'}">¥${f(brem)}</div><div class="ksub">粗利の目安</div></div>`;
+    <div class="kpi"><div class="klbl">制作費 残り</div><div class="kval ${brem<0?'cr':'cb'}">¥${f(brem)}</div><div class="ksub">粗利の目安</div></div>`;
 
   const prows = PROCS.map((pn,i)=>{
     const pr = (p.processes||[]).find(q=>q.name===pn)||{};
-    const h  = pr.hours||0, c = pr.cost||0;
+    const h=pr.hours||0, c=pr.cost||0;
     const pp = p.targetBudget>0?(c/p.targetBudget)*100:0;
     const mfc= pp>=20?'fr':pp>=10?'fa':'fg';
     return `<tr>
       <td><div class="pncell"><span class="pno">${i+1}</span><div><div>${x(pn)}</div><div class="psub">${x(pr.assignee||'未設定')}</div></div></div></td>
-      <td><span class="mono">${h>0?h+'h':'<span class="nd">—</span>'}</span></td>
+      <td>${h>0?`<span class="mono">${h}h</span>`:'<span class="nd">—</span>'}</td>
       <td>${c>0?`<span class="ccost">¥${f(c)}</span>`:'<span class="nd">—</span>'}</td>
       <td>${c>0?`<div class="mbwrap"><div class="mbar"><div class="mfill ${mfc}" style="width:${Math.min(pp*3,100)}%"></div></div><span class="ptxt">${pp.toFixed(1)}%</span></div>`:'<span class="nd" style="font-size:11px">—</span>'}</td>
     </tr>`;
   }).join('');
 
   const staffH = (p.staff||[]).map(s=>`
-    <div class="schip">
-      <div class="av">${s.name.slice(0,2)}</div>
-      <span class="cname">${x(s.name)}</span>
-      <span class="crate">¥${f(s.hourlyRate)}/h</span>
-    </div>`).join('');
+    <div class="schip"><div class="av">${s.name.slice(0,2)}</div><span class="cname">${x(s.name)}</span><span class="crate">¥${f(s.hourlyRate)}/h</span></div>`).join('');
 
   const pOpts = ['すべての工程',...PROCS].map((n,i)=>`<option value="${i===0?'':n}">${x(n)}</option>`).join('');
   const sNames = [...new Set((p.logs||[]).map(l=>l.assignee).filter(Boolean))];
@@ -438,7 +648,10 @@ function buildDetail(p) {
       <button class="tab" data-t="staff">担当者</button>
     </div>
     <div id="tp-processes" class="tpanel active">
-      <div class="twrap"><table><thead><tr><th>工程</th><th>作業時間</th><th>人件費</th><th>予算消化</th></tr></thead><tbody>${prows}</tbody></table></div>
+      <div class="twrap"><table>
+        <thead><tr><th>工程</th><th>作業時間</th><th>人件費</th><th>予算消化</th></tr></thead>
+        <tbody>${prows}</tbody>
+      </table></div>
     </div>
     <div id="tp-log" class="tpanel">
       <div class="lctrl2">
@@ -449,98 +662,75 @@ function buildDetail(p) {
     </div>
     <div id="tp-staff" class="tpanel">
       <div class="stitle">この案件の担当者</div>
-      <div class="srow">${staffH||'<span style="color:var(--text3);font-size:13px">担当者情報がありません</span>'}</div>
+      <div class="srow">${staffH||'<span style="color:var(--text2);font-size:13px">担当者情報がありません</span>'}</div>
     </div>`;
 }
 
 function renderLog(p) {
   const pf = (document.getElementById('log-pf')||{}).value||'';
   const sf = (document.getElementById('log-sf')||{}).value||'';
-  let logs = (p.logs||[]).filter(l => (!pf||l.process===pf) && (!sf||l.assignee===sf));
-  logs.sort((a,b) => (b.date||'').localeCompare(a.date||''));
+  let logs = (p.logs||[]).filter(l=>(!pf||l.process===pf)&&(!sf||l.assignee===sf));
+  logs.sort((a,b)=>(b.date||'').localeCompare(a.date||''));
   const wrap = document.getElementById('log-wrap');
   if (!wrap) return;
   if (!logs.length) { wrap.innerHTML=`<div class="loading-wrap" style="padding:32px 0;font-size:13px">作業ログがありません</div>`; return; }
   const th = logs.reduce((s,l)=>s+(l.hours||0),0);
   const tc = logs.reduce((s,l)=>s+(l.cost||0),0);
-  const rows = logs.map(l=>`<tr>
-    <td><span class="mono">${x(l.date||'—')}</span></td>
-    <td>${x(l.process||'—')}</td>
-    <td>${x(l.assignee||'—')}</td>
-    <td><span class="mono">${l.hours||0}h</span></td>
-    <td><span class="ccost">¥${f(l.cost||0)}</span></td>
-  </tr>`).join('');
   wrap.innerHTML=`<div class="twrap"><table>
     <thead><tr><th>日付</th><th>工程</th><th>担当者</th><th>時間</th><th>人件費</th></tr></thead>
-    <tbody>${rows}
-    <tr style="background:var(--bg3)">
-      <td colspan="3" style="text-align:right;font-size:11px;color:var(--text3);font-weight:600;letter-spacing:.4px;text-transform:uppercase">合計</td>
-      <td><span class="mono" style="font-weight:600">${th}h</span></td>
-      <td><span class="ccost" style="font-weight:600">¥${f(tc)}</span></td>
-    </tr></tbody>
+    <tbody>
+      ${logs.map(l=>`<tr><td><span class="mono">${x(l.date||'—')}</span></td><td>${x(l.process||'—')}</td><td>${x(l.assignee||'—')}</td><td><span class="mono">${l.hours||0}h</span></td><td><span class="ccost">¥${f(l.cost||0)}</span></td></tr>`).join('')}
+      <tr style="background:var(--bg2)"><td colspan="3" style="text-align:right;font-size:11px;color:var(--text2);font-weight:700;letter-spacing:.4px;text-transform:uppercase">合計</td><td><span class="mono" style="font-weight:600">${th}h</span></td><td><span class="ccost" style="font-weight:600">¥${f(tc)}</span></td></tr>
+    </tbody>
   </table></div>`;
 }
 
-// ── DEMO ──
+// =============================================
+//  デモ
+// =============================================
 function showDemo() {
   DATA = { projects:[
-    { sheetName:'d1', name:'株式会社サンプル コーポレートサイト', manager:'田中 太郎', status:'進行中', budget:800000, targetBudget:480000, usedCost:186000,
-      staff:[{name:'田中 太郎',hourlyRate:3000},{name:'鈴木 花子',hourlyRate:2500},{name:'山田 一郎',hourlyRate:3500}],
+    { sheetName:'d1', name:'植物園前ライラック皮膚科', manager:'三浦 優子', status:'進行中', budget:500000, targetBudget:300000, usedCost:25200,
+      staff:[{name:'三浦 優子',hourlyRate:1800},{name:'高橋みふゆ',hourlyRate:1800}],
       processes:[
-        {name:'契約',assignee:'田中 太郎',hours:1,cost:3000},{name:'ヒアリングシート回収',assignee:'田中 太郎',hours:0.5,cost:1500},
-        {name:'サイトマップ作成',assignee:'田中 太郎',hours:3,cost:9000},{name:'ディレクトリマップ作成',assignee:'田中 太郎',hours:2,cost:6000},
-        {name:'トップページWF作成',assignee:'田中 太郎',hours:5,cost:15000},{name:'下層ページテキスト作成',assignee:'鈴木 花子',hours:8,cost:20000},
-        {name:'トップページデザイン',assignee:'山田 一郎',hours:16,cost:56000},{name:'下層ページデザイン',assignee:'山田 一郎',hours:10,cost:35000},
-        {name:'トップページ実装',assignee:'鈴木 花子',hours:10,cost:25000},{name:'下層ページ実装',assignee:'鈴木 花子',hours:6,cost:15000},
+        {name:'契約',assignee:'三浦 優子',hours:0,cost:0},{name:'ヒアリングシート回収',assignee:'三浦 優子',hours:0,cost:0},
+        {name:'サイトマップ作成',assignee:'三浦 優子',hours:3,cost:5400},{name:'ディレクトリマップ作成',assignee:'三浦 優子',hours:0,cost:0},
+        {name:'トップページWF作成',assignee:'三浦 優子',hours:5,cost:9000},{name:'下層ページテキスト作成',assignee:'三浦 優子',hours:0,cost:0},
+        {name:'トップページデザイン',assignee:'高橋みふゆ',hours:6,cost:10800},{name:'下層ページデザイン',assignee:'高橋みふゆ',hours:0,cost:0},
+        {name:'トップページ実装',assignee:'',hours:0,cost:0},{name:'下層ページ実装',assignee:'',hours:0,cost:0},
+        {name:'公開',assignee:'',hours:0,cost:0},{name:'GSC・GA4設定',assignee:'',hours:0,cost:0},
       ],
       logs:[
-        {date:'2025-05-14',process:'下層ページ実装',assignee:'鈴木 花子',hours:3,cost:7500},
-        {date:'2025-05-14',process:'下層ページデザイン',assignee:'山田 一郎',hours:4,cost:14000},
-        {date:'2025-05-13',process:'トップページ実装',assignee:'鈴木 花子',hours:4,cost:10000},
-        {date:'2025-05-12',process:'トップページデザイン',assignee:'山田 一郎',hours:6,cost:21000},
-        {date:'2025-05-09',process:'下層ページテキスト作成',assignee:'鈴木 花子',hours:8,cost:20000},
-        {date:'2025-05-08',process:'トップページWF作成',assignee:'田中 太郎',hours:5,cost:15000},
-        {date:'2025-05-07',process:'ディレクトリマップ作成',assignee:'田中 太郎',hours:2,cost:6000},
-        {date:'2025-05-06',process:'サイトマップ作成',assignee:'田中 太郎',hours:3,cost:9000},
-        {date:'2025-05-01',process:'契約',assignee:'田中 太郎',hours:1,cost:3000},
+        {date:'2025-05-13',process:'トップページデザイン',assignee:'高橋みふゆ',hours:6,cost:10800},
+        {date:'2025-05-09',process:'トップページWF作成',assignee:'三浦 優子',hours:5,cost:9000},
+        {date:'2025-05-07',process:'サイトマップ作成',assignee:'三浦 優子',hours:3,cost:5400},
       ]},
-    { sheetName:'d2', name:'医療法人サンプルクリニック Webリニューアル', manager:'鈴木 花子', status:'進行中', budget:600000, targetBudget:360000, usedCost:318000,
-      staff:[{name:'鈴木 花子',hourlyRate:2500},{name:'山田 一郎',hourlyRate:3500}],
+    { sheetName:'d2', name:'サンプル株式会社 採用サイト', manager:'三浦 優子', status:'進行中', budget:400000, targetBudget:240000, usedCost:180000,
+      staff:[{name:'三浦 優子',hourlyRate:1800},{name:'高橋みふゆ',hourlyRate:1800}],
       processes:[
-        {name:'契約',assignee:'鈴木 花子',hours:1,cost:2500},{name:'ヒアリングシート回収',assignee:'鈴木 花子',hours:1,cost:2500},
-        {name:'サイトマップ作成',assignee:'鈴木 花子',hours:4,cost:10000},{name:'ディレクトリマップ作成',assignee:'鈴木 花子',hours:3,cost:7500},
-        {name:'トップページWF作成',assignee:'鈴木 花子',hours:6,cost:15000},{name:'下層ページテキスト作成',assignee:'鈴木 花子',hours:12,cost:30000},
-        {name:'トップページデザイン',assignee:'山田 一郎',hours:20,cost:70000},{name:'下層ページデザイン',assignee:'山田 一郎',hours:24,cost:84000},
-        {name:'トップページ実装',assignee:'鈴木 花子',hours:14,cost:35000},{name:'下層ページ実装',assignee:'鈴木 花子',hours:24,cost:60000},
-        {name:'公開',assignee:'鈴木 花子',hours:1,cost:2500},
+        {name:'契約',assignee:'三浦 優子',hours:1,cost:1800},{name:'ヒアリングシート回収',assignee:'三浦 優子',hours:1,cost:1800},
+        {name:'サイトマップ作成',assignee:'三浦 優子',hours:4,cost:7200},{name:'ディレクトリマップ作成',assignee:'三浦 優子',hours:3,cost:5400},
+        {name:'トップページWF作成',assignee:'三浦 優子',hours:6,cost:10800},{name:'下層ページテキスト作成',assignee:'三浦 優子',hours:10,cost:18000},
+        {name:'トップページデザイン',assignee:'高橋みふゆ',hours:20,cost:36000},{name:'下層ページデザイン',assignee:'高橋みふゆ',hours:20,cost:36000},
+        {name:'トップページ実装',assignee:'高橋みふゆ',hours:20,cost:36000},{name:'下層ページ実装',assignee:'高橋みふゆ',hours:12,cost:21600},
+        {name:'公開',assignee:'三浦 優子',hours:1,cost:1800},{name:'GSC・GA4設定',assignee:'三浦 優子',hours:2,cost:3600},
       ],
-      logs:[
-        {date:'2025-05-14',process:'下層ページ実装',assignee:'鈴木 花子',hours:4,cost:10000},
-        {date:'2025-05-13',process:'下層ページデザイン',assignee:'山田 一郎',hours:6,cost:21000},
-        {date:'2025-05-12',process:'下層ページ実装',assignee:'鈴木 花子',hours:4,cost:10000},
-      ]},
-    { sheetName:'d3', name:'ECサイト構築 サンプルショップ', manager:'田中 太郎', status:'完了', budget:1200000, targetBudget:720000, usedCost:698000,
-      staff:[{name:'田中 太郎',hourlyRate:3000},{name:'鈴木 花子',hourlyRate:2500},{name:'山田 一郎',hourlyRate:3500}],
-      processes:[
-        {name:'契約',assignee:'田中 太郎',hours:1,cost:3000},{name:'ヒアリングシート回収',assignee:'田中 太郎',hours:1,cost:3000},
-        {name:'サイトマップ作成',assignee:'田中 太郎',hours:4,cost:12000},{name:'ディレクトリマップ作成',assignee:'田中 太郎',hours:3,cost:9000},
-        {name:'トップページWF作成',assignee:'田中 太郎',hours:8,cost:24000},{name:'下層ページテキスト作成',assignee:'鈴木 花子',hours:20,cost:50000},
-        {name:'トップページデザイン',assignee:'山田 一郎',hours:24,cost:84000},{name:'下層ページデザイン',assignee:'山田 一郎',hours:30,cost:105000},
-        {name:'トップページ実装',assignee:'鈴木 花子',hours:20,cost:50000},{name:'下層ページ実装',assignee:'鈴木 花子',hours:60,cost:150000},
-        {name:'公開',assignee:'田中 太郎',hours:2,cost:6000},{name:'GSC・GA4設定',assignee:'田中 太郎',hours:4,cost:12000},
-      ],logs:[]},
+      logs:[]},
   ]};
   stamp();
-  setLC(`<div class="setup-box">⚙ <strong>GAS URLが未設定です。</strong> HTMLファイルの <code>GAS_URL</code> にデプロイURLを設定してください。<br>以下はデモデータです。</div><div class="cgrid">${DATA.projects.map(pcHTML).join('')}</div>`);
-  document.getElementById('lmeta').textContent = DATA.projects.length + ' 件表示（デモ）';
+  document.getElementById('page-sub').textContent = `全 ${DATA.projects.length} 件（デモ）`;
+  setLC(`<div class="info-box">⚙ <strong>スプレッドシートIDが未設定です。</strong> HTMLファイルの <code>SHEET_ID</code> を設定してください。<br>以下はデモデータです。</div><div class="cgrid">${DATA.projects.map(pcHTML).join('')}</div>`);
+  document.getElementById('lmeta').textContent = DATA.projects.length + ' 件表示';
   document.querySelectorAll('.pcard').forEach(c=>{ c.onclick=()=>showDetail(c.dataset.s); });
+  renderSidebar();
 }
 
-// ── UTILS ──
+// =============================================
+//  ユーティリティ
+// =============================================
 function f(n) { return (isNaN(n)||n==null)?'0':Math.round(n).toLocaleString('ja-JP'); }
 function x(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
-// init
 if (sessionStorage.getItem('auth')==='1') loadData();
 </script>
 </body>
